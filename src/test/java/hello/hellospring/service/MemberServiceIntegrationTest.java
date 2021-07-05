@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -39,7 +43,6 @@ class MemberServiceIntegrationTest {
         //given
         Member member1 = new Member();
         member1.setName("spring");
-
         Member member2 = new Member();
         member2.setName("spring");
         //when

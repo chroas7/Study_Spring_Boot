@@ -3,6 +3,7 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +21,18 @@ public class MemberService {
 
     /*    회원 가입     */
     public Long join(Member member) {
-        // 같은 이름이 있는 중복 회원 불가
-        validateDuplicateMember(member); // 중복 회원 검증
-        memberRepository.save(member);
+        long start = System.currentTimeMillis();
+        try {
+
+
+            // 같은 이름이 있는 중복 회원 불가
+            validateDuplicateMember(member); // 중복 회원 검증
+            memberRepository.save(member);
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " +timeMs + "ms");
+        }
         return member.getId();
     }
 
