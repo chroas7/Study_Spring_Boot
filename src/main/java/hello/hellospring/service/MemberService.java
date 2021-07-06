@@ -14,25 +14,16 @@ import java.util.Optional;
 @Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
-    
+
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
     /*    회원 가입     */
     public Long join(Member member) {
-        long start = System.currentTimeMillis();
-        try {
-
-
-            // 같은 이름이 있는 중복 회원 불가
-            validateDuplicateMember(member); // 중복 회원 검증
-            memberRepository.save(member);
-        } finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("join = " +timeMs + "ms");
-        }
+        // 같은 이름이 있는 중복 회원 불가
+        validateDuplicateMember(member); // 중복 회원 검증
+        memberRepository.save(member);
         return member.getId();
     }
 
